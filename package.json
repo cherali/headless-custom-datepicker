@@ -2,7 +2,7 @@
   "name": "custom-datepicker",
   "version": "0.1.0",
   "description": "Headless UI datepicker",
-  "main": "dist/src/index.js",
+  "main": "dist/index.js",
   "repository": "custom-datepicker",
   "author": "Ali Cheraghi",
   "private": false,
