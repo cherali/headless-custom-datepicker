@@ -4,7 +4,10 @@
   "description": "Headless UI datepicker",
   "main": "dist/index.js",
   "repository": "custom-datepicker",
-  "author": "Ali Cheraghi",
+  "author": {
+    "name": "Ali Cheraghi",
+    "email": "alicheraghi148@gmail.com"
+  },
   "private": false,
   "license": "MIT",
   "scripts": {
