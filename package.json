@@ -1,9 +1,23 @@
 {
   "name": "custom-datepicker",
   "version": "0.1.0",
-  "description": "Headless UI datepicker",
+  "description": "Headless UI picker for any js base library/framework",
   "main": "dist/index.js",
-  "repository": "custom-datepicker",
+  "repository": "cherali/custom-datepicker",
+  "keywords": [
+    "picker",
+    "datepicker",
+    "date picker",
+    "rangepicker",
+    "range picker",
+    "react-datepicker",
+    "react-rangepicker",
+    "headless-datepicker",
+    "jalali",
+    "jalali-picker",
+    "jalali-datepicker",
+    "jalali-rangepicker"
+  ],
   "author": {
     "name": "Ali Cheraghi",
     "email": "alicheraghi148@gmail.com"
@@ -16,6 +30,9 @@
     "format:fix": "prettier --write  \"src/**\" \"__tests__/**\"",
     "format": "prettier --check \"src/**\" \"__tests__/**\"",
     "lint": "eslint src __tests__"
+  },
+  "bugs": {
+    "url": "https://github.com/cherali/custom-datepicker/issues"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "5.48.1",
