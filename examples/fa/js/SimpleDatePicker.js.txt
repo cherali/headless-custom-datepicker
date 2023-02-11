@@ -1,4 +1,4 @@
-import { CustomDatePicker, createDate, addZero} from 'custom-datepicker'
+import { CustomDatePicker, createDate, addZero} from 'headless-custom-datepicker'
 
 const picker = (function () {
   function toEnglishNumber(str) {

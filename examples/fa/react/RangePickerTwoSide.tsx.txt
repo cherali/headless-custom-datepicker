@@ -4,7 +4,7 @@ import {
   DatePickerLocale,
   addZero,
   createDate
-} from "custom-datepicker"
+} from "headless-custom-datepicker"
 import { useIntl } from "react-intl"
 
 const faLocale: DatePickerLocale = (year) => ({

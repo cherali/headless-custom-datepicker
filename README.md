@@ -1,4 +1,4 @@
-# custom-datepicker
+# headless-custom-datepicker
 
 An Headless picker for any js base library/framework that supportig import. you can create your own UI. provide core picker functionality and customizable.
 
@@ -49,10 +49,10 @@ An Headless picker for any js base library/framework that supportig import. you 
 
 ## Installation
 ```bash
-npm i custom-datepicker
+npm i headless-custom-datepicker
 
 # or using Yarn:
-yarn add custom-datepicker
+yarn add headless-custom-datepicker
 ```
 
 ## Documentation
@@ -339,7 +339,7 @@ I use `react-intl` for localization and multi-language but if you don't need mul
 import { useIntl } from "react-intl"
 import {
   addZero,
-} from "custom-datepicker"
+} from "headless-custom-datepicker"
 
 ...
 
@@ -430,7 +430,7 @@ for using range picker
 `crete datePicker instance`
 ```tsx
 
-import { CustomDatePicker } from 'custom-datepicker'
+import { CustomDatePicker } from 'headless-custom-datepicker'
 import { useState, useEffect, useMemo } from 'react'
 
 function SimpleDatePicker(){

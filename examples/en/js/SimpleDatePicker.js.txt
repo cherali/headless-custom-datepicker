@@ -1,4 +1,4 @@
-import { CustomDatePicker, createDate} from 'custom-datepicker'
+import { CustomDatePicker, createDate} from 'headless-custom-datepicker'
 
 const picker = (function () {
   const enLocale = () => ({

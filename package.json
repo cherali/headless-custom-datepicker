@@ -1,9 +1,9 @@
 {
-  "name": "custom-datepicker",
+  "name": "headless-custom-datepicker",
   "version": "1.0.0",
   "description": "Headless UI picker for any js base library/framework",
   "main": "dist/index.js",
-  "repository": "cherali/custom-datepicker",
+  "repository": "cherali/headless-custom-datepicker",
   "keywords": [
     "picker",
     "datepicker",
@@ -32,7 +32,7 @@
     "lint": "eslint src __tests__"
   },
   "bugs": {
-    "url": "https://github.com/cherali/custom-datepicker/issues"
+    "url": "https://github.com/cherali/headless-custom-datepicker/issues"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "5.48.1",

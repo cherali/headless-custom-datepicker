@@ -3,7 +3,7 @@ import {
   CustomDatePicker,
   DatePickerLocale,
   createDate
-} from "custom-datepicker"
+} from "headless-ustom-datepicker"
 
 
 const enLocale: DatePickerLocale = () => ({
