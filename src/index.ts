@@ -1,3 +1,10 @@
-const test = [1, 2]
+// core
+export * from './core/DatePicker'
 
-export { test }
+// utils
+export {
+  isValidDateFormat,
+  addZero,
+  createDate,
+  validateDate
+} from './utils/dateUtils'
