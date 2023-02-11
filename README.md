@@ -21,9 +21,11 @@ An Headless picker for any js base library/framework that supportig import. you 
 
 
 <hr />
-<img alt='img' src='./assets/simple2.PNG' width='250px' height='200px' />
-<img alt='range-picker' src='./assets/range-picker.PNG' width='505px' height='200px' />
-<img alt='img-localization' src='./assets/simple-localization.PNG' width='250px' height='200px' />
+<p float='left'>
+  <img alt='img' src='./assets/simple2.PNG' width='250px' height='200px' />
+  <img alt='range-picker' src='./assets/range-picker.PNG' width='505px' height='200px' />
+  <img alt='img-localization' src='./assets/simple-localization.PNG' width='250px' height='200px' />
+</p>
 <hr />
 
 ## Futures:
