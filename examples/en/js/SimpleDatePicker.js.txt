@@ -1,0 +1,415 @@
+import { CustomDatePicker, createDate} from 'custom-datepicker'
+
+const picker = (function () {
+  const enLocale = () => ({
+    months: {
+      1: { name: "January", numberOfDays: 31 },
+      2: { name: "February", numberOfDays: 28 },
+      3: { name: "March", numberOfDays: 31 },
+      4: { name: "April", numberOfDays: 30 },
+      5: { name: "May", numberOfDays: 31 },
+      6: { name: "June", numberOfDays: 30 },
+      7: { name: "July", numberOfDays: 31 },
+      8: { name: "August", numberOfDays: 31 },
+      9: { name: "September", numberOfDays: 30 },
+      10: { name: "October", numberOfDays: 31 },
+      11: { name: "November", numberOfDays: 30 },
+      12: { name: "December", numberOfDays: 31 },
+    }
+  })
+  
+  
+  const weeksTitle = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+  ]
+  
+  const datepickerHeight = 300
+
+  let date = createDate().toISOString().slice(0, 10) // convert date to iso format YYYY-MM-DD
+  
+  const {
+    onChageDate,
+    setOpen,
+    setMode,
+    getDate,
+    isSelectedDay,
+    changeDay,
+    getRenderedMonthName,
+    getRenderedYear,
+    handleShowNextMonth,
+    handleShowPrevMonth,
+    getMonthList,
+    changeMonth,
+    getYearsList,
+    changeYear,
+    getRenderedMonth,
+    goToToday,
+    getDaysArray,
+    getDayMonthOffset,
+    getMode,
+    isOpen,
+    isLoadingState
+  } = new CustomDatePicker({
+    date: date,
+    locale: enLocale,
+    dayRenderType: "fill",
+  })
+  
+  
+  const RenderTitle = ({ year, month }) => (`
+    <div>
+      <button
+        style='
+          border: none;
+          height: auto;
+          background-color: transparent
+        '
+        class='set-year-mode'
+      >
+        <h2 style='display: inline'>${year}</h2>
+      </button>
+      <button
+        style='
+          background-color: transparent;
+          border: none;
+        '
+        class='set-month-mode'
+      >
+        <h2 style='display: inline'>${month}</h2>
+      </button>
+    </div>
+  `) // format markup
+  .replace(/(\r\n|\n|\r)/gm," ").replace(/ +(?= )/g,'')
+  
+  const getRangePickerBackgroundColor = (day, currentColor, selectColor, otherColor) => {
+    if (day.state !== 'current') return otherColor
+    else if (isSelectedDay(day.date)) return selectColor
+    else return currentColor
+  }
+
+
+  const getRangePickerColor = (day, currentColor, selectColor, otherColor) => {
+    if (isSelectedDay(day.date) && day.state === "current") return selectColor
+    else if (day.state === 'current') return currentColor
+    else return otherColor
+  }
+
+
+  const dayStyle = (day) => `
+    background-color: ${getRangePickerBackgroundColor(day, '#cacaca', '#2cf2f2', '#d8d8d8')};
+    color: ${getRangePickerColor(day, '#000', '#099090', '#888')};
+    width: 100%;
+    border: none;
+    padding: 5px 0;
+  `
+
+  const createMark = () => {
+    const daysList = getDaysArray()
+    return `
+  <div style="display: inline-block; width: auto" id="container">
+    <button id='go-to-today'>go to today</button>
+
+    <div style="width: 300px ">
+      <input
+        type="text"
+        value="${getDate()}"
+        id='date-picker-input'
+        />
+  
+      <div style="display: ${isOpen() ? 'flex': 'none'}; width: 300px; gap: 16px; flex-direction: row">
+
+        <div style=" flex: 1; display: ${getMode() === 'year' ? 'block': 'none'} ">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: row-reverse"
+            >
+              <div style="flex: 1; text-align: end"></div>
+              <div>
+                ${RenderTitle({
+                  month: getRenderedMonthName(),
+                  year:getRenderedYear()
+                })}
+              </div>
+              <div style="flex: 1 ">
+                <button class='--back'>back</button>
+              </div>
+            </div>
+
+            <div style="width: 100%; margin: 0 auto;">
+              <div
+                style="
+                  display: flex;
+                  height: ${datepickerHeight}px;
+                  overflow: auto;
+                  flex-wrap: wrap;
+                  gap: 3px;
+                "
+              >
+                ${getYearsList(1950, 2050).map((year) => `
+                  <div
+                    style="
+                      background-color: ${
+                        getRenderedYear() === year ? "#cacaca" : "#fafafa"
+                      };
+                      padding: 1px 0px;
+                      text-align: center;
+                      width: 19%;
+                    }}
+                  >
+                    <button
+                      style="
+                        background-color: transparent;
+                        border: none;
+                        color:${
+                          getRenderedYear() === year ? "black" : "#808080"
+                        };
+                      "
+                      class='--year'
+                      data-value="${year}"
+                    >
+                      ${year}
+                    </button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+  
+
+          <div style="display: ${getMode() === "month" ? 'black': 'none'};flex: 1">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: row-reverse;
+              "
+            >
+              <div style=" flex: 1; text-align: end"> </div>
+              <div>
+                ${RenderTitle({
+                  month: getRenderedMonthName(),
+                  year:getRenderedYear()
+                })}
+              </div>
+              <div style="flex: 1">
+                <button class='--back'>back</button>
+              </div>
+            </div>
+      
+            <div style=" width: 100%; margin: 0 auto">
+              <div
+                style=" height: ${datepickerHeight}px; overflow: auto" 
+              >
+                ${getMonthList().map((month) => `
+                  <div
+                    style="
+                      background-color:${
+
+                        getRenderedMonth() === month.monthNumber
+                        ? "#cacaca"
+                        : "#fff"
+                      };
+                      padding: 1px 5px;
+                    "
+                  >
+                    <button
+                      style="
+                        width: 100%;
+                        padding: 0;
+                        margin: 0;
+                        background-color: transparent;
+                        border: none;
+                      "
+                      data-value="${month.monthNumber}"
+                      class='change-month'
+                    >
+                      <p>${month.name}</p>
+                    </button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+
+
+          <div style="display: ${getMode() === "day" && !isLoadingState() ? 'black': 'none'};flex: 1">
+            <div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <div>
+                  <button id="prev-btn">prev</button>
+                </div>
+                
+                ${RenderTitle({
+                  month: getRenderedMonthName(),
+                  year:getRenderedYear()
+                })}
+                <div>
+                  <button id="next-btn">next</button>
+                </div>
+              </div>
+        
+              <div
+                style="
+                  display: flex;
+                  padding: 7px 0 5px;
+                  flex-wrap: wrap;
+                "
+              >
+                ${weeksTitle.map((week) => 
+                  `<div
+                    style="
+                      background-color: #dadada;
+                      text-align: center;
+                      width: ${100 / 7}%
+                    "
+                  >
+                    <span>${week}</span>
+                  </div>
+                `).join('')}
+              </div>
+        
+              <div style="display: flex; flex-wrap: wrap;">
+        
+                ${Array(getDayMonthOffset(0)).fill('').map(() => `
+                  <div style="width: ${100 / 7}%"></div>
+                `)}
+        
+                ${daysList.map((day) =>`
+                    <div style="width: ${100 / 7}%">
+                      <button
+                        style="${dayStyle(day)}"
+                        class='--days'
+                        data-value="${day.date}"
+                        data-value-state="${day.state}"
+                      >
+                        ${day.day}
+                      </button>
+                    </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+  // format markup
+  .replace(/(\r\n|\n|\r)/gm," ").replace(/ +(?= )/g,'')
+  }
+  
+  
+  const updateDom = (state) => {
+    document.getElementById('app').innerHTML = createMark(state)
+  }
+  
+  updateDom()
+
+  const changeOpenState = (state) => () => {
+    setOpen(state)
+    updateDom()
+  }
+
+  const setPickerMode = (mode) => () => {
+    setMode(mode)
+    updateDom()
+  }
+
+  const handleNextMonth = () => {
+    handleShowNextMonth()
+    updateDom()
+  }
+
+  const handlePrevMonth = () => {
+    handleShowPrevMonth()
+    updateDom()
+  }
+
+  const onDayClicked = (date, state) => () => {
+    changeDay(date, state)
+    updateDom()
+ }
+
+ const handleSetMonth = (month) => () => {
+  changeMonth(Number(month))
+
+  updateDom()
+ }
+
+ const handleChangeYear = (year) => () => {
+  changeYear(year)
+
+  updateDom()
+ }
+
+  const addListeners = () => {
+    document.querySelectorAll('.set-year-mode').forEach(qs => qs.addEventListener('click', setPickerMode('year')))
+    document.querySelectorAll('.set-month-mode').forEach(qs => qs.addEventListener('click', setPickerMode('month')))
+    document.querySelector('#date-picker-input').addEventListener('focus', changeOpenState(true))
+    document.querySelector('#go-to-today').addEventListener('click', goToToday)
+
+
+    document.querySelector('#prev-btn').addEventListener('click', handlePrevMonth)
+    document.querySelector('#next-btn').addEventListener('click', handleNextMonth)
+
+    document.querySelectorAll('.--back').forEach(qs => qs.addEventListener('click', setPickerMode('day')))
+
+    document.querySelectorAll('.change-month').forEach(qs => {
+      qs.addEventListener('click', handleSetMonth(qs.attributes['data-value'].value))
+    })
+
+    document.querySelectorAll('.--days').forEach(qs => {
+      qs.addEventListener('click', onDayClicked(qs.attributes['data-value'].value, qs.attributes['data-value-state'].value))
+    })
+
+    document.querySelectorAll('.--year').forEach(qs => {
+      qs.addEventListener('click', handleChangeYear(qs.attributes['data-value'].value))
+    })
+  }
+
+
+  onChageDate((newdate) => {
+    updateDom()
+    setTimeout(() => {
+     addListeners() 
+    });
+  })
+
+
+  setTimeout(() => {
+    addListeners()
+  })
+
+
+  // close date picker by clicking outside
+  const handleClickOutside = (event) => {
+    const container = document.getElementById('container')
+    if (container && !container.contains(event.target)) {
+
+      changeOpenState(false)()
+    }
+  }
+
+  document.addEventListener('click', handleClickOutside, true)
+
+})
+
+document.addEventListener('DOMContentLoaded',function() {
+  picker() 
+})
