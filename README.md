@@ -39,7 +39,7 @@ An Headless picker for any js base library/framework that supportig import. you 
 + Fast and easy to use
 + No other third party library
 + Very low bundle size
-+ Written in ts
++ Written in typescript
 
 
 ## Before start
