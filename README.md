@@ -37,10 +37,10 @@ An Headless picker for any js base library/framework that supportig import. you 
 + Working with all js base library/framework supporting import (eg, js (with asset bundler), react, react native, angular , ...)
 + Can add holidays, events, badge with no headache
 + Fast and easy to use
++ supprot leap year
 + No other third party library
 + Very low bundle size
 + Written in typescript
-
 
 ## Before start
 + This package builds on js new Date() so all the dates are based on gregorian calendars
@@ -436,10 +436,10 @@ import { useState, useEffect, useMemo } from 'react'
 function SimpleDatePicker(){
   const [date, setDate] = useState<Date>(new Date())
 
-  const enLocale: DatePickerLocale = () => ({
+  const enLocale: DatePickerLocale = (year) => ({
     months: {
       1: { name: "January", numberOfDays: 31 },
-      2: { name: "February", numberOfDays: 28 },
+      2: { name: "February", numberOfDays: year % 4 === 0 ? 29 : 28 },
       3: { name: "March", numberOfDays: 31 },
       4: { name: "April", numberOfDays: 30 },
       5: { name: "May", numberOfDays: 31 },

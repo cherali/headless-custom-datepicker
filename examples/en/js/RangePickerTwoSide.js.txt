@@ -1,10 +1,10 @@
 import { CustomDatePicker, createDate} from 'headless-custom-datepicker'
 
 const picker = (function () {
-  const enLocale = () => ({
+  const enLocale = (year) => ({
     months: {
       1: { name: "January", numberOfDays: 31 },
-      2: { name: "February", numberOfDays: 28 },
+      2: { name: "February", numberOfDays: year % 4 === 0 ? 29 : 28 },
       3: { name: "March", numberOfDays: 31 },
       4: { name: "April", numberOfDays: 30 },
       5: { name: "May", numberOfDays: 31 },
