@@ -6,5 +6,6 @@ export {
   isValidDateFormat,
   addZero,
   createDate,
-  validateDate
+  validateDate,
+  formatDate,
 } from './utils/dateUtils'
