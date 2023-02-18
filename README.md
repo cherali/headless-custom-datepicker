@@ -37,7 +37,7 @@ An Headless picker for any js base library/framework that supportig import. you 
 + Working with all js base library/framework supporting import (eg, js (with asset bundler), react, react native, angular , ...)
 + Can add holidays, events, badge with no headache
 + Fast and easy to use
-+ support leap year
++ Support leap year
 + No other third party library
 + Very low bundle size
 + Written in typescript
