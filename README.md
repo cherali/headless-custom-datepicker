@@ -59,7 +59,7 @@ yarn add headless-custom-datepicker
 
 ### Definition
 renderedDate -> used to calculate date for showing days \
-selectedDate -> the date selected by user \
+selectedDate -> the date selected by user
 
 ### Types
 ```ts
@@ -87,7 +87,7 @@ provide a way to customize locale based on your region
 - name and numberOfDays are required
 - the name used to be shown at the top of the picker
 
-* why is it a function? to support leap year year on some calendars like Jalali
+* why is it a function? to support leap year year
 
 `dateFormatter?: (date: DateFormat) => date` \
 used to convert dates for localization.
