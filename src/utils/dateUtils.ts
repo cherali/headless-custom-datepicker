@@ -8,7 +8,9 @@ export const validateDate = (date: string) => {
 
 export const isValidDateFormat = (date: any): boolean => Boolean(typeof date === 'string' && date.match(datePattern) && !isNaN(new Date(date).getTime()))
 
-export const formatDate = (date: Date) => {
+export const formatDate = (date?: Date) => {
+  if (!date) return ''
+
   const isoDate = date.toISOString()
 
   return isoDate.slice(0, isoDate.indexOf('T'))
