@@ -32,7 +32,7 @@ An Headless picker for any js base library/framework that supportig import. you 
 + Easy setup and config
 + Headless UI
 + Easy localization
-+ RangePicker and DatePicker 
++ RangePicker and DatePicker
 + Event base Picker
 + Working with all js base library/framework supporting import (eg, js (with asset bundler), react, react native, angular , ...)
 + Can add holidays, events, badge with no headache
@@ -65,10 +65,9 @@ selectedDate -> the date selected by user
 ```ts
 DateFormat: 'YYYY-MM-DD'
 MonthListObject: {name: string, numberOfDays: number, monthNumber: number }
-DatePickerMonthState: 'current' | 'next'
+PickerMonthState: 'current' | 'next'
 LocaleProps: { months: { [0 - 12]: {name: string, numberOfDays: number } }}
 -------------------------------------------------
-DatePickerType = 'datePicker' | 'rangePicker'
 DaysStateTypes = 'prev' | 'next' | 'current'
 Days {  day: number,  state: DaysStateTypes,  date: DateFormat }
 Mode = 'day' | 'month' | 'year'
@@ -76,8 +75,9 @@ Mode = 'day' | 'month' | 'year'
 
 
 ### Customization
+** Range Picker and DatePicker has own implementations so some property and halpers only available in Range Picker (helpers tagged with [`RangePicker`] in documentation).
 
-#### DatePicker property
+#### Common property:
 
 `twoSide?: boolean - default: false` \
 enable or disable twoSide picker
@@ -114,22 +114,21 @@ set how many rows datepicker to rendered \
 create 150 ms timeout to change the calendar state for better UX on selecting next or perv month directly when dayRenderType = 'fill' \
 ** can be disabled by set it to 0
 
+`date?: DateFormat` \
+this used to show selected date
+
+#### RangePicker property:
+
 `normalized?: boolean - default: true` \
 this determine how to two side date picker behave \
 if this is true the odd months start at first and the next month comes after and monthStep default value = 2 and month navigation jumps every 2 months \
 if false the render month comes first and the next after monthStep is set to 1 <br /><br />
-** Highly recommended this flag set to true if type is rangePicker
+** Highly recommended this flag set to true if you using RangePicker
 
-`type?: 'datePicker' | 'rangePicker' - default: 'datePicker'`\
-set type of datePicker
-	
-`date?: DateFormat` \
-this used to show selected date
-	
 `endDate?: DateFormat`\
 only set for reangePicker if you want to highlight a default range 
 
-#### DatePicker return object
+#### Picker return object:
 `onChangeDate: (newDate: DateFormat) => void` \
 the event triggered on change event and use to update picker
 
@@ -197,24 +196,29 @@ return next month name, use for title, use to render two side date picker
 `getRenderedNextDateYear: () => number` \
 return next rendered date year
 
+`getDayMonthOffset: (index: 0 | 1) => number` \
+this function get month days offset when dayRenderType is 'fill', else return 0
+
+[`RangePicker`] \
 `onCellHover: (date: DateFormat) => void` \
 called on date picker cell hover
 ** Only works on range picker
 
+[`RangePicker`] \
 `getEndDate: () => string` \
 return selected end date
 
+[`RangePicker`] \
 `isDateInRange: (date: DateFormat, includeStart: boolean = false, includeEnd: boolean = true) => boolean` \
 return true if the given date is in range, this used for styling range picker
 
+[`RangePicker`] \
 `isSelecting: () => boolean` \
 return true if the state of date picker is `selecting`, range picker helper
 
+[`RangePicker`] \
 `isEndDate: (date: DateFormat) => boolean` \
 return true if the given date is equal to the end date selected in the range picker
-
-`getDayMonthOffset: (index: 0 | 1) => number` \
-this function get month days offset when dayRenderType is 'fill', else return 0
 
 <hr />
 
@@ -230,21 +234,25 @@ return unformatted rendered date
 `getSelecteDateUnformated: () => string` \
 return unformatted selected date
 
+[`RangePicker`] \
 `getSelecteEndDateUnformated: () => string | undefined` \
 return unformatted selected end date or undefined
 
+[`RangePicker`] \
 `getSelectedEndDate: () => string | undefined` \
 return formatted selected end date or undefined
 
 `getRenderedNextMonth: () => number` \
 return next month number
 
+[`RangePicker`] \
 `isStartDate: (date: DateFormat) => boolean` \
 return if given date is equal to start date (selected date)
 
 `setDate: (date: DateFormat) => void` \
 set selected date directly.
 
+[`RangePicker`] \
 `setEndDate: (date: DateFormat) => void` \
 set selected end date directly.
 
@@ -277,6 +285,8 @@ crete date including timezone
 `validateDate: (date: string) => void` \
 if date is invalid throw error
 
+`formatDate: (date?: Date) => void` \
+return given date with format `YYYY-MM-DD` or '' (empty string) if given date undefined
 
 #### Localization
 for localization:
@@ -314,7 +324,7 @@ weekOfset: 1,
 - step 3:
 
 ```tsx
-const faLocale: DatePickerLocale = (year) => ({ // return month name and numberOfDays in jalali calendar
+const faLocale: PickerLocale = (year) => ({ // return month name and numberOfDays in jalali calendar
   months: {
     1: { name: "فروردین", numberOfDays: 31 }, // first month and numberOfDays
     2: { name: "اردیبهشت", numberOfDays: 31 },
@@ -389,7 +399,7 @@ function toEnglishNumber(str: string) { // you can move this function to utils f
 so the DatePicker looks like this
 
 ```tsx
-new CustomDatePicker({
+new DatePicker({
   locale: faLocale,
   dateFormatter: formatter,
   weekOffset: 1,
@@ -403,10 +413,9 @@ before testing, I need to change body direction to `rtl` and font size. ***(chec
 after that, It's done.
 
 
-#### Range Picker
-for using range picker
-- set twoSide to true `twoSide: true`
-- set type to 'rangePicker' `type: 'rangePicker'`
+#### RangePicker
+In version 2 and latest, RangePicker has own implemenation, so instead of `new DatePicker` you most use `new RangePicker` then:
+- set twoSide to true `twoSide: true` (for better ux, you can set this flag to false if you want)
 - in this case, is better to set normalized flag to true `with twoSide flag normalized automatically set to true`
 
 
@@ -430,13 +439,13 @@ for using range picker
 `crete datePicker instance`
 ```tsx
 
-import { CustomDatePicker } from 'headless-custom-datepicker'
+import { DatePicker, PickerLocale, createDate, formatDate } from 'headless-custom-datepicker'
 import { useState, useEffect, useMemo } from 'react'
 
 function SimpleDatePicker(){
-  const [date, setDate] = useState<Date>(new Date())
+  const [date, setDate] = useState<Date>(createDate())
 
-  const enLocale: DatePickerLocale = (year) => ({
+  const enLocale: PickerLocale = (year) => ({
     months: {
       1: { name: "January", numberOfDays: 31 },
       2: { name: "February", numberOfDays: year % 4 === 0 ? 29 : 28 },
@@ -460,8 +469,8 @@ function SimpleDatePicker(){
     changeDay,
     ...rest
   } = useMemo( // useMemo to insure that only one instance of datePicker exist and remain the same on  re-rendering
-    () => new CustomDatePicker({
-      date: date.toISOString().slice(0, 10), // convert date to iso format YYYY-MM-DD
+    () => new DatePicker({
+      date: formatDate(date), // convert date to iso format YYYY-MM-DD
       locale: enLocale, 
     }), [])
 
