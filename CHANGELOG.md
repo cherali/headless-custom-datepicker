@@ -1,7 +1,7 @@
 ## 2.0.0
 
 ### Core
-* Seperate implementation of DatePicker and RangePicker
+* Separate implementation of DatePicker and RangePicker
 
 ### Utils
 * Export formatDate
