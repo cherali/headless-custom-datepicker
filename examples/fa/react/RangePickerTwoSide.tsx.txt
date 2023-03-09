@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef, useMemo, useTransition } from "react"
 import {
-  CustomDatePicker,
-  DatePickerLocale,
+  RangePicker,
+  PickerLocale,
   addZero,
-  createDate
+  createDate,
+  formatDate,
 } from "headless-custom-datepicker"
 import { useIntl } from "react-intl"
 
-const faLocale: DatePickerLocale = (year) => ({
+const faLocale: PickerLocale = (year) => ({
   months: {
     1: { name: "فروردین", numberOfDays: 31 },
     2: { name: "اردیبهشت", numberOfDays: 31 },
@@ -98,8 +99,8 @@ function RangePickerTwoSide() {
     isEndDate,
     getDayMonthOffset,
   } = useMemo( // use memo to insure that only one instance of datePicker exist and don't change on re-rendering
-    () => new CustomDatePicker({
-      date: date.toISOString().slice(0, 10), // convert date to iso format YYYY-MM-DD
+    () => new RangePicker({
+      date: formatDate(date), // convert date to iso format YYYY-MM-DD
       locale: faLocale,
       dateFormatter: formatter,
       weekOffset: 1,

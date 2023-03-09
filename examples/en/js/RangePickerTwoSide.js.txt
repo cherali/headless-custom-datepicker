@@ -1,4 +1,4 @@
-import { CustomDatePicker, createDate} from 'headless-custom-datepicker'
+import { RangePicker, createDate, formatDate } from 'headless-custom-datepicker'
 
 const picker = (function () {
   const enLocale = (year) => ({
@@ -31,7 +31,7 @@ const picker = (function () {
   
   const datepickerHeight = 300
 
-  let date = createDate().toISOString().slice(0, 10) // convert date to iso format YYYY-MM-DD
+  let date = formatDate(createDate()) // convert date to iso format YYYY-MM-DD
   
   const {
     onChageDate,
@@ -62,15 +62,17 @@ const picker = (function () {
     getMode,
     isOpen,
     isLoadingState
-  } = new CustomDatePicker({
+  } = new RangePicker({
     date: date,
     locale: enLocale,
     dayRenderType: "fill",
     twoSide: true,
-    type: 'rangePicker'
   })
+
+  // format markup
+  const formatMarkup = (markup) => markup.replace(/(\r\n|\n|\r)/gm," ").replace(/ +(?= )/g,'')
   
-  const RenderTitle = ({ year, month }) => (`
+  const RenderTitle = ({ year, month }) => formatMarkup(`
     <div>
       <button
         style='
@@ -92,8 +94,7 @@ const picker = (function () {
         <h2 style='display: inline'>${month}</h2>
       </button>
     </div>
-  `) // format markup
-  .replace(/(\r\n|\n|\r)/gm," ").replace(/ +(?= )/g,'')
+  `) 
   
   const getRangePickerBackgroundColor = (day, currentColor, selectColor, hoverdColor, otherColor) => {
     if (day.state !== 'current') return otherColor
@@ -136,7 +137,7 @@ const picker = (function () {
   const createMark = () => {
     const daysList = getDaysArray()
     const daysListNext =getDaysArray('next')
-    return `
+    return formatMarkup(`
   <div style="display: inline-block; width: auto" id="container">
     <button id='go-to-today'>go to today</button>
 
@@ -405,9 +406,7 @@ const picker = (function () {
       </div>
       </div>
     </div>
-  `
-  // format markup
-  .replace(/(\r\n|\n|\r)/gm," ").replace(/ +(?= )/g,'')
+  `)
   }
   
   
