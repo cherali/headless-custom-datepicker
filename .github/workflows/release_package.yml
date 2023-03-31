@@ -1,0 +1,26 @@
+name: Release package
+on:
+  workflow_dispatch:
+    inputs:
+      release-type:
+        description: 'Release type (one of): patch, minor, major, prepatch, preminor, premajor, prerelease'
+        required: true
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout project repository
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      # Configure Git
+      - name: Git configuration
+        run: |
+          git config --global user.email "alicheraghi148@gmail.com"
+          git config --global user.name "Ali.Cheraghi"
+
+      # Publish version to public repository
+      - name: Publish
+        run: npm publish --verbose --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPMJS_ACCESS_TOKEN }}
