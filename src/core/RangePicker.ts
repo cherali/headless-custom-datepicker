@@ -83,7 +83,7 @@ class RangePicker extends BasePicker {
   public getSelecteEndDateUnformated = () => this._selectedEndDate
 
   private _updateChangeDay = (date: string) => {
-    this.isLoading = false
+    this._isLoading = false
 
     if (!this._selectedDate) {
       this._selectedDate = date
@@ -103,7 +103,7 @@ class RangePicker extends BasePicker {
   }
 
   public goToToday = () => {
-    this.open = true
+    this._open = true
     this._forceLoadingStart()
 
     const newDate = formatDate(createDate())

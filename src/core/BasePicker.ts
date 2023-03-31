@@ -50,9 +50,9 @@ abstract class BasePicker {
 
   protected _dateFormatter: (date: string) => string
 
-  public open = false
-  public mode: PickerMode = 'day'
-  public isLoading = false;
+  protected _open = false
+  protected _mode: PickerMode = 'day'
+  protected _isLoading = false;
 
   constructor(props: BasePickerOptions) {
     const selectedDate = formatDate(createDate(props.date))
@@ -87,6 +87,19 @@ abstract class BasePicker {
     this._state = 'rendered'
   }
 
+  // getters
+  public get mode() {
+    return this._mode
+  }
+
+  public get isLoading() {
+    return this._isLoading
+  }
+
+  public get open() {
+    return this._open
+  }
+
   public onChageDate = (cb: EventEmitterCallback) => this._events.subscribe(PickerEvents.changeDate, cb)
 
   protected _tiggerUpdate = (eventName: PickerEvents) => {
@@ -103,7 +116,7 @@ abstract class BasePicker {
   private _changeViewListener = () => this._tiggerUpdate(PickerEvents.changeDate)
   private _changeStateListener = (state: PickerState) => {
     this._state = state
-    this.isLoading = state === 'loading'
+    this._isLoading = state === 'loading'
 
     this._days = this._calculateDays()
     this._tiggerUpdate(PickerEvents.changeDate)
@@ -300,7 +313,7 @@ abstract class BasePicker {
 
     this._renderedDate = this._calculateRenderedDate(formatDate(newDate), this._normalized, this._twoSide, this._dateFormatter, true)
 
-    if (forceClosing) this.mode = 'day'
+    if (forceClosing) this._mode = 'day'
 
     this._forceUpdate()
   }
@@ -313,7 +326,7 @@ abstract class BasePicker {
 
     this._renderedDate = formatDate(newDate)
 
-    if (forceClosing) this.mode = 'day'
+    if (forceClosing) this._mode = 'day'
 
     this._forceUpdate()
   }
@@ -347,7 +360,7 @@ abstract class BasePicker {
   }
 
   public goToToday = () => {
-    this.open = true
+    this._open = true
     this._forceLoadingStart()
 
     const newDate = formatDate(createDate())
@@ -361,16 +374,16 @@ abstract class BasePicker {
   }
 
   public setOpen = (open: boolean) => {
-    if (this.open !== open) {
-      this.open = open
+    if (this._open !== open) {
+      this._open = open
 
       this._events.emit(PickerEvents.changeOpen)
     }
   }
 
   public setMode = (mode: PickerMode) => {
-    if (mode !== this.mode) {
-      this.mode = mode
+    if (mode !== this._mode) {
+      this._mode = mode
 
       this._events.emit(PickerEvents.changeMode)
     }
@@ -383,9 +396,9 @@ abstract class BasePicker {
     this._forceUpdate()
   }
 
-  public getMode = () => this.mode
-  public isOpen = () => this.open
-  public isLoadingState = () => this.isLoading
+  public getMode = () => this._mode
+  public isOpen = () => this._open
+  public isLoadingState = () => this._isLoading
 
   // abstracts
   public abstract changeDay(date: string, state: DaysStateTypes): void
