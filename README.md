@@ -1,6 +1,6 @@
 # headless-custom-datepicker
 
-An Headless picker for any js base library/framework that supportig import. you can create your own UI. provide core picker functionality and customizable.
+An Headless picker for any js base library/framework that supporting import. you can create your own UI. provide core picker functionality and customizable.
 
 ### Table of Contents
 - [Futures](#futures)
@@ -10,11 +10,12 @@ An Headless picker for any js base library/framework that supportig import. you 
   - [Definition](#definition)
   - [Types](#types)
   - [Customization](#customization)
-    - [DatePicker args](#datepicker-args)
-    - [DatePicker return object](#datepicker-return-object)
+    - [Common property](#common-property)
+    - [RangePicker property](#rangepicker-property)
+    - [Picker return object](#picker-return-object)
     - [Utils helpers](#utils-helpers)
     - [Localization](#localization)
-    - [Range Picker](#range-picker)
+    - [Range Picker](#rangepicker)
 - [Limitatin](#limitatin)
 - [Important Notes](#important-notes)
 - [Codes Samples](#code-sample)
@@ -30,14 +31,15 @@ An Headless picker for any js base library/framework that supportig import. you 
 + Easy setup and config
 + Headless UI
 + Easy localization
-+ RangePicker and DatePicker
 + Event base Picker
++ DatePicker
++ RangePicker
 + Working with all js base library/framework supporting import (eg, js (with asset bundler), react, react native, angular , ...)
 + Can add holidays, events, badge with no headache
 + Fast and easy to use
 + Support leap year
 + No other third party library
-+ Very low bundle size
++ Very low bundle size ( ~ 3KB )
 + Written in typescript
 
 ## Before start
@@ -412,23 +414,44 @@ after that, It's done.
 
 
 #### RangePicker
-In version 2 and latest, RangePicker has own implemenation, so instead of `new DatePicker` you most use `new RangePicker` then:
+In version 2 and above, RangePicker has own implemenation, so instead of `new DatePicker` you most use `new RangePicker` then:
 - set twoSide to true `twoSide: true` (for better ux, you can set this flag to false if you want)
 - in this case, is better to set normalized flag to true `with twoSide flag normalized automatically set to true`
 
 
 
 ## Limitatin
-- be sure Date picker does not create new instances on each render, this is an event-based picker and must be created only once at the start (in React most useMemo for not recreate instance), this mess up with event listener
-- this is not a time picker
-- only 12-month calendars supported
+- be sure pickers does not create new instances on each render, this is an event-based picker and must be created only once at the start (in React most useMemo for not recreate instance), this mess up with event listener.
+- time picker not supported.
+- only 12-month calendars supported.
 - your apps must support module system, so you can't use it in the old fashioned javascript app, but you can use it in js app configured with asset bundlers.
 
 
 ## Important Notes
 - Although all naming is determined by developer, recommended to used meaningful names. (not too short or long).
 - It's very important to make sure picker instances remain the same on each re-render.
-- Key binding is not implemented, so if you want you can add your own binding system
+- Key binding is not implemented, so if you want you can add your own binding system.
+- 
+- You can add your desire evnets just create event object with key of date and value of array of string (for simple events) or object (for more complex events like colorized and etc) then render it any where you want. For example simple events look like this:
+```tsx
+const events = {
+  '2023-03-31': [
+    'This is a complex EVENT!',
+  ],
+}
+```
+
+and complex one: 
+```tsx
+const events = {
+  '2023-03-31': [
+    { eventType: 'event', text: 'This is a complex EVENT - normal - #1' },
+    { eventType: 'holiday', text: 'This is a complex EVENT - red color - #2' },
+  ],
+}
+```
+
+
 
 ## Code Sample
 ** this code sample is written for React Js. \
