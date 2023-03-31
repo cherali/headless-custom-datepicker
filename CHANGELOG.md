@@ -1,3 +1,7 @@
+## 2.1.1
+### Documentation
+* Improve documentation.
+
 ## 2.1.0
 ### Core
 * Add getter for mode, loading, open.

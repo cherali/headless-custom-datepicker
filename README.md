@@ -436,7 +436,7 @@ In version 2 and above, RangePicker has own implemenation, so instead of `new Da
 ```tsx
 const events = {
   '2023-03-31': [
-    'This is a complex EVENT!',
+    'EVENT!',
   ],
 }
 ```
