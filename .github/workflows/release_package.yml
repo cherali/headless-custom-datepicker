@@ -15,7 +15,6 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
 
       # Publish version to public repository
       - run: npm publish --verbose --access public
