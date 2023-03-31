@@ -1,3 +1,10 @@
+## 2.1.0
+### Core
+* Add getter for mode, loading, open.
+
+### Documentation
+* Improve documentation and provide image for Event.
+
 ## 2.0.0
 
 ### Core
