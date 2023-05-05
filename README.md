@@ -3,7 +3,7 @@
 An Headless picker for any js base library/framework that supporting import. you can create your own UI. provide core picker functionality and customizable.
 
 ### Table of Contents
-- [Futures](#futures)
+- [Features](#features)
 - [Before start](#before-start)
 - [Installation](#installation)
 - [Documentation](#documentation)
@@ -27,7 +27,7 @@ An Headless picker for any js base library/framework that supporting import. you
 
 <hr />
 
-## Futures:
+## Features:
 + Easy setup and config
 + Headless UI
 + Easy localization
