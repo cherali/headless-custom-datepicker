@@ -1,6 +1,6 @@
 {
   "name": "headless-custom-datepicker",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Headless UI picker for any js base library/framework",
   "main": "dist/index.js",
   "repository": "cherali/headless-custom-datepicker",
