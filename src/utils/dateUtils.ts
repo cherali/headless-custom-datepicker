@@ -2,7 +2,7 @@ const datePattern = /^\d{4}-[01]\d-[0-3]\d$/
 
 export const validateDate = (date: string) => {
   if (!date.match(datePattern) && date) {
-    throw new Error('Invalid Date Fromat, only YYYY-MM-DD date format is allowed.')
+    throw new Error('Invalid Date Format, only YYYY-MM-DD date format is allowed.')
   }
 }
 

@@ -34,7 +34,7 @@ const picker = (function () {
   let date = formatDate(createDate()) // convert date to iso format YYYY-MM-DD
   
   const {
-    onChageDate,
+    onChangeDate,
     setOpen,
     setMode,
     getDate,
@@ -484,7 +484,7 @@ const picker = (function () {
   }
 
 
-  onChageDate((newdate) => {
+  onChangeDate((newdate) => {
     updateDom()
     setTimeout(() => {
      addListeners() 

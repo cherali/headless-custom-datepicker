@@ -36,7 +36,7 @@ abstract class BasePicker {
   protected _renderedDate: string
 
   protected _days: Array<Days>
-  protected _monthOfsetIndex: Array<number> = [0, 0]
+  protected _monthOffsetIndex: Array<number> = [0, 0]
   protected _weekOffset: number
 
   protected _dayRenderType: PickerDayRenderType
@@ -100,9 +100,9 @@ abstract class BasePicker {
     return this._open
   }
 
-  public onChageDate = (cb: EventEmitterCallback) => this._events.subscribe(PickerEvents.changeDate, cb)
+  public onChangeDate = (cb: EventEmitterCallback) => this._events.subscribe(PickerEvents.changeDate, cb)
 
-  protected _tiggerUpdate = (eventName: PickerEvents) => {
+  protected _triggerUpdate = (eventName: PickerEvents) => {
     if (this._selectedDate) {
       const sDate = createDate(this._selectedDate)
       sDate.setMilliseconds(createDate().getMilliseconds())
@@ -112,14 +112,14 @@ abstract class BasePicker {
   }
 
   private _calculateDaysListener = () => this._days = this._calculateDays()
-  private _changeOpenListener = () => this._tiggerUpdate(PickerEvents.changeDate)
-  private _changeViewListener = () => this._tiggerUpdate(PickerEvents.changeDate)
+  private _changeOpenListener = () => this._triggerUpdate(PickerEvents.changeDate)
+  private _changeViewListener = () => this._triggerUpdate(PickerEvents.changeDate)
   private _changeStateListener = (state: PickerState) => {
     this._state = state
     this._isLoading = state === 'loading'
 
     this._days = this._calculateDays()
-    this._tiggerUpdate(PickerEvents.changeDate)
+    this._triggerUpdate(PickerEvents.changeDate)
   }
 
   protected _forceLoadingStart = () => this._delayTimeout > 0 && this._events.emit(PickerEvents.changeState, 'loading')
@@ -198,11 +198,11 @@ abstract class BasePicker {
 
 
     if (this._dayRenderType === 'space') {
-      this._monthOfsetIndex[monthIndex] = numberOfZeros
+      this._monthOffsetIndex[monthIndex] = numberOfZeros
     } else if (this._dayRenderType === 'fill') {
 
-      this._monthOfsetIndex[0] = -this._weekOffset
-      this._monthOfsetIndex[1] = -this._weekOffset
+      this._monthOffsetIndex[0] = -this._weekOffset
+      this._monthOffsetIndex[1] = -this._weekOffset
 
       const startLength = ((numberOfZeros + this._weekOffset) % 7 + this._calculateAutoRowStartLength(daysArray.length))
       const pDate = createDate(formatDate(prevDate))
@@ -254,7 +254,7 @@ abstract class BasePicker {
 
   protected _forceUpdate = (date?: string) => {
     this._days = this._calculateDays(date)
-    this._tiggerUpdate(PickerEvents.changeDate)
+    this._triggerUpdate(PickerEvents.changeDate)
   }
 
 
@@ -291,8 +291,8 @@ abstract class BasePicker {
   }
 
 
-  public getSelecteDateUnformated = () => this._selectedDate
-  public getRenderedDateUnformated = () => this._renderedDate
+  public getSelectedDateUnformatted = () => this._selectedDate
+  public getRenderedDateUnformatted = () => this._renderedDate
 
   public getRenderedMonth = () => getMonth(this._getRenderedDate())
   public getRenderedMonthName = () => this._getLocale(this._getYear()).months[this._calculateMonthOfDate<keyof MonthsProps>(this._getRenderedDate())].name
@@ -302,7 +302,7 @@ abstract class BasePicker {
   public getRenderedNextMonthName = () => this._getLocale(getFullYear(this._nextMonthDate())).months[this._calculateMonthOfDate<keyof MonthsProps>(this._nextMonthDate())].name
   public getRenderedNextDateYear = () => getFullYear(this._nextMonthDate())
 
-  public getDayMonthOffset = (index: 0 | 1 = 0) => (this._monthOfsetIndex[index] + this._weekOffset) % 7
+  public getDayMonthOffset = (index: 0 | 1 = 0) => (this._monthOffsetIndex[index] + this._weekOffset) % 7
 
   public changeMonth = (month: number, forceClosing = true) => {
     const formatedDate = this._dateFormatter(formatDate(createDate(this._renderedDate)))
@@ -369,8 +369,8 @@ abstract class BasePicker {
     this._selectedDate = newDate
 
     this._forceLoadingEnd()
-    this._tiggerUpdate(PickerEvents.calculateDays)
-    this._tiggerUpdate(PickerEvents.changeDate)
+    this._triggerUpdate(PickerEvents.calculateDays)
+    this._triggerUpdate(PickerEvents.changeDate)
   }
 
   public setOpen = (open: boolean) => {

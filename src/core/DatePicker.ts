@@ -60,7 +60,7 @@ class DatePicker extends BasePicker {
     this._isLoading = false
     this._selectedDate = date
 
-    this._tiggerUpdate(PickerEvents.calculateDays)
+    this._triggerUpdate(PickerEvents.calculateDays)
   }
 
 }

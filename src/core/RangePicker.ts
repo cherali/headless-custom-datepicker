@@ -80,7 +80,7 @@ class RangePicker extends BasePicker {
   public isSelectedDay = (date: string) => this._selectedDate === date || this._selectedEndDate === date
   public getSelectedEndDate = () => this._selectedEndDate && this._dateFormatter(this._selectedEndDate)
 
-  public getSelecteEndDateUnformated = () => this._selectedEndDate
+  public getSelectedEndDateUnformatted = () => this._selectedEndDate
 
   private _updateChangeDay = (date: string) => {
     this._isLoading = false
@@ -93,7 +93,7 @@ class RangePicker extends BasePicker {
       this._state = 'rendered'
     }
 
-    this._tiggerUpdate(PickerEvents.calculateDays)
+    this._triggerUpdate(PickerEvents.calculateDays)
   }
 
   public getEndDate = () => {
@@ -114,8 +114,8 @@ class RangePicker extends BasePicker {
     this._hoveredDate = ''
 
     this._forceLoadingEnd()
-    this._tiggerUpdate(PickerEvents.calculateDays)
-    this._tiggerUpdate(PickerEvents.changeDate)
+    this._triggerUpdate(PickerEvents.calculateDays)
+    this._triggerUpdate(PickerEvents.changeDate)
   }
 
   public onCellHover = (date: string) => {
@@ -128,7 +128,7 @@ class RangePicker extends BasePicker {
           this._state = 'rendered'
         }
 
-        this._tiggerUpdate(PickerEvents.changeDate)
+        this._triggerUpdate(PickerEvents.changeDate)
       }
     }
   }

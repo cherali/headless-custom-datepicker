@@ -1,3 +1,8 @@
+## 2.1.2 - 2.1.4
+* minor bug fixed
+* fix typo
+* fix break in NextJs
+
 ## 2.1.1
 ### Documentation
 * Improve documentation.

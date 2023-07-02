@@ -20,7 +20,7 @@ declare class RangePicker extends BasePicker {
     changeDay: (date: string, state: DaysStateTypes) => void;
     isSelectedDay: (date: string) => boolean;
     getSelectedEndDate: () => string | undefined;
-    getSelecteEndDateUnformated: () => string | undefined;
+    getSelectedEndDateUnformatted: () => string | undefined;
     private _updateChangeDay;
     getEndDate: () => string;
     goToToday: () => void;

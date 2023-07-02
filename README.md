@@ -16,7 +16,7 @@ An Headless picker for any js base library/framework that supporting import. you
     - [Utils helpers](#utils-helpers)
     - [Localization](#localization)
     - [Range Picker](#rangepicker)
-- [Limitatin](#limitatin)
+- [Limitation](#limitation)
 - [Important Notes](#important-notes)
 - [Codes Samples](#code-sample)
 
@@ -75,7 +75,7 @@ Mode = 'day' | 'month' | 'year'
 
 
 ### Customization
-** Range Picker and DatePicker has own implementations so some property and halpers only available in Range Picker (helpers tagged with [`RangePicker`] in documentation).
+** Range Picker and DatePicker has own implementations so some property and helpers only available in Range Picker (helpers tagged with [`RangePicker`] in documentation).
 
 #### Common property:
 
@@ -108,7 +108,7 @@ Whether or not the rendered days is in middle
 `datePickerMaxRow?: number - default: 6` \
 set how many rows datepicker to rendered \
 6 shows all rows completely with one or two extra row base if dayRenderType = 'fill' <br /><br />
-** recommend not to change it. but the acceptable tested row <= 12, more row cause problem so be carefull.
+** recommend not to change it. but the acceptable tested row <= 12, more row cause problem so be careful.
 
 `delayTimeout?: number - default: 150` \
 create 150 ms timeout to change the calendar state for better UX on selecting next or perv month directly when dayRenderType = 'fill' \
@@ -126,7 +126,7 @@ if false the render month comes first and the next after monthStep is set to 1 <
 ** Highly recommended this flag set to true if you using RangePicker
 
 `endDate?: DateFormat`\
-only set for reangePicker if you want to highlight a default range 
+only set for rangePicker if you want to highlight a default range 
 
 #### Picker return object:
 `onChangeDate: (newDate: DateFormat) => void` \
@@ -172,7 +172,7 @@ return list of month
 `changeMonth: (monthNumber: number) => void` \
 use to change month
 	
-`getYearsList: (minimumYear: number, maximumYear: number) => numer[]` \
+`getYearsList: (minimumYear: number, maximumYear: number) => number[]` \
 return list of years based on givin minimumYear, maximumYear
 	
 `changeYear: (year) => void` \
@@ -228,14 +228,14 @@ handler use to show next year, use for year navigation
 `handleShowPrevYear: () => void` \
 handler use to show previous year, use for year navigation
 
-`getRenderedDateUnformated: () => string` \
+`getRenderedDateUnformatted: () => string` \
 return unformatted rendered date
 
-`getSelecteDateUnformated: () => string` \
+`getSelectedDateUnformatted: () => string` \
 return unformatted selected date
 
 [`RangePicker`] \
-`getSelecteEndDateUnformated: () => string | undefined` \
+`getSelectedEndDateUnformatted: () => string | undefined` \
 return unformatted selected end date or undefined
 
 [`RangePicker`] \
@@ -312,11 +312,11 @@ const weeksTitle = [
 ```
 
 - step 2: \
-in jalali first day of week is Saturday so need to set weekOfset to 1
+in jalali first day of week is Saturday so need to set weekOffset to 1
 
 ```tsx
 ...
-weekOfset: 1,
+weekOffset: 1,
 ...
 
 ```
@@ -368,7 +368,7 @@ function toEnglishNumber(str: string) { // you can move this function to utils f
   ...
 
   const formatter = (date: string) => { // date format is 'YYYY-MM-DD'
-    // formatted date using formatDate from react-intl and splited based on '/'
+    // formatted date using formatDate from react-intl and split based on '/'
     // react-intl formatDate returns formatted date based on your locale, so all numbers are converted based on
     // your locale but the picker can't understand that (because use new Date() js function)
     // so need to spilt it based on '/' and convert that number to English number
@@ -414,13 +414,13 @@ after that, It's done.
 
 
 #### RangePicker
-In version 2 and above, RangePicker has own implemenation, so instead of `new DatePicker` you most use `new RangePicker` then:
+In version 2 and above, RangePicker has own implementation, so instead of `new DatePicker` you most use `new RangePicker` then:
 - set twoSide to true `twoSide: true` (for better ux, you can set this flag to false if you want)
 - in this case, is better to set normalized flag to true `with twoSide flag normalized automatically set to true`
 
 
 
-## Limitatin
+## Limitation
 - be sure pickers does not create new instances on each render, this is an event-based picker and must be created only once at the start (in React most useMemo for not recreate instance), this mess up with event listener.
 - time picker not supported.
 - only 12-month calendars supported.
@@ -432,7 +432,7 @@ In version 2 and above, RangePicker has own implemenation, so instead of `new Da
 - It's very important to make sure picker instances remain the same on each re-render.
 - Key binding is not implemented, so if you want you can add your own binding system.
 - 
-- You can add your desire evnets just create event object with key of date and value of array of string (for simple events) or object (for more complex events like colorized and etc) then render it any where you want. For example simple events look like this:
+- You can add your desire events just create event object with key of date and value of array of string (for simple events) or object (for more complex events like colorized and etc) then render it any where you want. For example simple events look like this:
 ```tsx
 const events = {
   '2023-03-31': [
@@ -484,7 +484,7 @@ function SimpleDatePicker(){
   })
 
   const {
-    onChageDate,
+    onChangeDate,
     getDaysArray,
     getDayMonthOffset,
     changeDay,
@@ -497,7 +497,7 @@ function SimpleDatePicker(){
 
   // set date on change selected date, use changeDay for on click item
   useEffect(() => {
-    onChageDate((newdate) => setDate(newdate))
+    onChangeDate((newDate) => setDate(newDate))
   }, [])
 
 

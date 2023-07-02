@@ -70,7 +70,7 @@ function RangePickerTwoSide() {
 
 
   const {
-    onChageDate,
+    onChangeDate,
     open,
     setOpen,
     mode,
@@ -113,7 +113,7 @@ function RangePickerTwoSide() {
 
   useEffect(() => {
     // change date listener
-    onChageDate((newdate) => setDate(newdate))
+    onChangeDate((newdate) => setDate(newdate))
 
     // close date picker on click outside
     const handleClickOutside = (event: any) => {

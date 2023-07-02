@@ -71,7 +71,7 @@ function DatePickerTwoSide() {
 
 
   const {
-    onChageDate,
+    onChangeDate,
     open,
     setOpen,
     mode,
@@ -108,7 +108,7 @@ function DatePickerTwoSide() {
 
   useEffect(() => {
     // change date listener
-    onChageDate((newdate) => setDate(newdate))
+    onChangeDate((newdate) => setDate(newdate))
 
     // close date picker on click outside
     const handleClickOutside = (event: any) => {

@@ -51,7 +51,7 @@ const picker = (function () {
   }
   
   const {
-    onChageDate,
+    onChangeDate,
     setOpen,
     setMode,
     getDate,
@@ -503,7 +503,7 @@ const picker = (function () {
   }
 
 
-  onChageDate((newdate) => {
+  onChangeDate((newdate) => {
     updateDom()
     setTimeout(() => {
      addListeners() 

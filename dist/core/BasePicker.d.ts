@@ -19,7 +19,7 @@ declare abstract class BasePicker {
     protected _selectedDate: string;
     protected _renderedDate: string;
     protected _days: Array<Days>;
-    protected _monthOfsetIndex: Array<number>;
+    protected _monthOffsetIndex: Array<number>;
     protected _weekOffset: number;
     protected _dayRenderType: PickerDayRenderType;
     protected _datePickerMaxRow: number;
@@ -36,10 +36,10 @@ declare abstract class BasePicker {
     get mode(): PickerMode;
     get isLoading(): boolean;
     get open(): boolean;
-    onChageDate: (cb: EventEmitterCallback) => {
+    onChangeDate: (cb: EventEmitterCallback) => {
         unsubscribe: () => EventEmitterCallback[];
     };
-    protected _tiggerUpdate: (eventName: PickerEvents) => void;
+    protected _triggerUpdate: (eventName: PickerEvents) => void;
     private _calculateDaysListener;
     private _changeOpenListener;
     private _changeViewListener;
@@ -64,8 +64,8 @@ declare abstract class BasePicker {
     getMonthList: () => MonthListObject[];
     getYearsList: (minimumYear: number, maximumYear: number) => Array<number>;
     getDate: () => string;
-    getSelecteDateUnformated: () => string;
-    getRenderedDateUnformated: () => string;
+    getSelectedDateUnformatted: () => string;
+    getRenderedDateUnformatted: () => string;
     getRenderedMonth: () => number;
     getRenderedMonthName: () => string;
     getRenderedYear: () => number;
