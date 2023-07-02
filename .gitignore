@@ -63,7 +63,6 @@ test*.ts
 .vscode
 **/.DS_Store
 
-dist
 coverage
 
 # package management lock files
